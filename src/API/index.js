@@ -1,23 +1,29 @@
 /* eslint-disable no-console */
 
 const express = require('express')
-const request = require('request')
+const updateDB = require('./methods/update-db')
+const getUrls = require('./methods/get-urls')
 // const routes = require('./router')
 
 const PORT = process.env.PORT || 5000
 
 express()
+  .use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+    next()
+  })
   .use(express.json())
   // .use(routes)
   .get('/', (req, res ) => {
-    request.get({ url: 'https://latelier.co/data/cats.json' },
-      (error, response, body) => {
-
-        JSON.parse(body).images.forEach(image => {
-          // console.log(image.id)
-          res.write(`<img src=${image.url}>`)
-        })
-        res.status(200).end()
-      })
+    // updateDB(getUrls())
+    getUrls((result) => {
+      // result.forEach((image) => {
+      //
+      //   res.write(JSON.parse(image.url))
+      // })
+      res.send(result)
+      res.end()
+    })
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'picture',
+  name: 'cat',
   data: () => ({ })
 }
 </script>
