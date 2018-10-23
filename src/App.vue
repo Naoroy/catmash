@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-    <Column></Column>
+    <!-- <Column></Column> -->
+    <h2>cats...</h2>
     <div>
-      <img v-for="img in images" :src="img.url" alt="">
+      <!-- <img v-for="img in images" :src="img.url" alt=""> -->
+      <!-- <img v-for="url in comparedUrls" :src="url" width="50%"> -->
+
     </div>
   </div>
 </template>
@@ -18,24 +21,40 @@ export default {
     Column
   },
   data: () => ({
-    images: []
+    images: [],
+    comparedUrls: []
   }),
   methods: {
-    getUrls() {
+    getUrls(callback) {
       const url = 'http://localhost:'+PORT
       const xhr = new XMLHttpRequest()
       xhr.onload = (result) => {
         const data = JSON.parse(result.target.response)
-        data.forEach((img) => {
-          this.images.push(img)
-        })
+        data.forEach((img) => { this.images.push(img) })
+        callback()
       }
       xhr.open('GET', url)
       xhr.send()
+    },
+    randomNumber() {
+      const random = () => Math.floor(Math.random() * 101)
+      const a = random()
+      const b = random()
+
+      return a !== b ? { a, b } : this.findTwoUrls()
+    },
+    findTwoUrls() {
+      const { a, b } = this.randomNumber()
+
+      this.comparedUrls = [
+        this.images[a].url,
+        this.images[b].url
+      ]
     }
-  },mounted() {
-    //do something after mounting vue instance
-    this.getUrls()
+  },
+  beforeMount() {
+    //do something before mounting vue instance
+    this.getUrls(this.findTwoUrls)
   }
 }
 </script>
