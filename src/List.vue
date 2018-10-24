@@ -1,13 +1,15 @@
 <template>
-  <div class="picture">
-    <img src="http://r.ddmcdn.com/s_f/o_1/cx_462/cy_245/cw_1349/ch_1349/w_720/APL/uploads/2015/06/caturday-shutterstock_149320799.jpg">
-    <button class="like"> boop </button>
+  <div id="list">
+    <div v-for="img in images" :key="img.id">
+      <img :src="img.url">
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'cat',
+  name: 'list',
+  props: { 'images': Array },
   data: () => ({ })
 }
 </script>
@@ -29,7 +31,7 @@ export default {
   height: 20vw;
 }
 
-img {
+#list img {
   opacity: .6;
   width: 65%;
   margin: auto;
@@ -39,7 +41,7 @@ img {
   transform: translateY(30%);
 }
 
-img:hover {
+#list img:hover {
   opacity: 1;
   width: 80%;
   transition: visibility 0s 2s, 400ms;

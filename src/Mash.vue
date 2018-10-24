@@ -1,22 +1,21 @@
 <template>
-  <div id="column">
-    <Picture></Picture>
-    <Picture></Picture>
-    <Picture></Picture>
+  <div id="mash">
+    <div v-for="img in imgs" v-bind:key="img.id">
+      <img class="cat-pic" :src="img.url">
+      <button> like </button>
+    </div>
   </div>
 </template>
 
 <script>
-import Picture from './Picture.vue'
-export default {
-  name: 'column',
-  components: {
-    Picture
-  },
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+export default  {
+  name: 'mash',
+  props: { 'images': Array },
+  data: () => ({
+
+  }),
+  computed: {
+    imgs() { return this.images }
   }
 }
 </script>

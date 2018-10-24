@@ -1,28 +1,31 @@
 <template>
   <div id="app">
-    <!-- <Column></Column> -->
     <h2>cats...</h2>
-    <div>
-      <!-- <img v-for="img in images" :src="img.url" alt=""> -->
-      <!-- <img v-for="url in comparedUrls" :src="url" width="50%"> -->
-
-    </div>
+    <nav>
+      <button @click="refreshMash"> Mash </button>
+      <button @click="mashPage=false"> List </button>
+    </nav>
+    <Mash v-show="mashPage" :images="comparedImages"></Mash>
+    <List v-show="!mashPage" :images="images"></List>
   </div>
 </template>
 
 <script>
-import Column from './Column.vue'
+import List from './List.vue'
+import Mash from './Mash.vue'
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 4000
 
 export default {
   name: 'app',
   components: {
-    Column
+    Mash,
+    List
   },
   data: () => ({
+    mashPage: true,
     images: [],
-    comparedUrls: []
+    comparedImages: []
   }),
   methods: {
     getUrls(callback) {
@@ -41,15 +44,20 @@ export default {
       const a = random()
       const b = random()
 
-      return a !== b ? { a, b } : this.findTwoUrls()
+      return a !== b ? { a, b } : this.randomNumber()
     },
     findTwoUrls() {
       const { a, b } = this.randomNumber()
 
-      this.comparedUrls = [
-        this.images[a].url,
-        this.images[b].url
+      this.comparedImages = [
+        this.images[a],
+        this.images[b]
       ]
+    },
+    refreshMash() {
+      this.mashPage=true
+      this.findTwoUrls()
+      // console.log(this.comparedImages[0].id)
     }
   },
   beforeMount() {
