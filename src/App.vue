@@ -29,6 +29,7 @@ export default {
     getUrls(callback) {
       const url = 'https://calm-citadel-31631.herokuapp.com/'
       const xhr = new XMLHttpRequest()
+
       xhr.onload = (result) => {
         const data = JSON.parse(result.target.response)
         data.forEach((img) => { this.images.push(img) })
