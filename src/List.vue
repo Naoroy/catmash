@@ -4,7 +4,7 @@
       <div class="card" v-for="img in images" :key="img.id">
         <img :src="img.url">
         <div class="stats">
-          <p> likes: 9000</p>
+          <p> likes: {{ img.total_likes }}</p>
         </div>
       </div>
     </div>

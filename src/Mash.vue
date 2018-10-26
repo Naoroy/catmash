@@ -1,9 +1,9 @@
 <template>
   <div id="mash">
     <div class="container">
-      <div class="card" v-for="img in imgs" v-bind:key="img.id">
+      <div :id="img.id" class="card" v-for="img in imgs" v-bind:key="img.id">
         <img :src="img.url">
-        <button class="like-btn"> like </button>
+        <button class="like-btn" @click="sendLike($event)"> like </button>
       </div>
     </div>
   </div>
@@ -16,6 +16,13 @@ export default  {
   data: () => ({
 
   }),
+  methods: {
+    sendLike(event) {
+      const id = event.target.parentElement.id
+
+      this.$emit('like', id)
+    }
+  },
   computed: {
     imgs() { return this.images }
   }
@@ -46,6 +53,7 @@ export default  {
 }
 .like-btn {
   width: 100%;
+  height: 8%;
   position: absolute;
   bottom: 0;
   left: 0;

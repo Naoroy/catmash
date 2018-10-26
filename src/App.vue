@@ -3,9 +3,9 @@
     <h2>cats...</h2>
     <nav>
       <button @click="refreshMash"> Mash </button>
-      <button @click="mashPage=false"> List </button>
+      <button @click="refreshImages"> List </button>
     </nav>
-    <Mash v-show="mashPage" :images="comparedImages"></Mash>
+    <Mash v-show="mashPage" v-on:like="handleLike($event)" :images="comparedImages"></Mash>
     <List v-show="!mashPage" :images="images"></List>
   </div>
 </template>
@@ -26,17 +26,20 @@ export default {
     comparedImages: []
   }),
   methods: {
-    getUrls(callback) {
-      const url = 'https://calm-citadel-31631.herokuapp.com/'
+    ajax(method, url, callback) {
       const xhr = new XMLHttpRequest()
 
-      xhr.onload = (result) => {
-        const data = JSON.parse(result.target.response)
-        data.forEach((img) => { this.images.push(img) })
-        callback()
-      }
+      xhr.onload = callback
       xhr.open('GET', url)
       xhr.send()
+    },
+    getUrls(callback) {
+      const url = 'https://calm-citadel-31631.herokuapp.com/'
+      this.ajax('GET', url, (result) => {
+        const data = JSON.parse(result.target.response)
+        data.forEach((img) => { this.images.push(img) })
+        return callback ? callback() : null
+      })
     },
     randomNumber() {
       const random = () => Math.floor(Math.random() * 101)
@@ -57,6 +60,18 @@ export default {
       this.mashPage=true
       this.findTwoUrls()
       // console.log(this.comparedImages[0].id)
+    },
+    refreshImages() {
+      this.mashPage=false
+      this.images = []
+      this.getUrls()
+    },
+    handleLike(id) {
+      const url = `https://calm-citadel-31631.herokuapp.com/like?id=${id}`
+      
+      this.ajax('GET', url, () => {
+        this.findTwoUrls()
+      })
     }
   },
   beforeMount() {
