@@ -1,7 +1,12 @@
 <template>
   <div id="list">
-    <div v-for="img in images" :key="img.id">
-      <img :src="img.url">
+    <div class="container">
+      <div class="card" v-for="img in images" :key="img.id">
+        <img :src="img.url">
+        <div class="stats">
+          <p> likes: 9000</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -14,62 +19,34 @@ export default {
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss" scoped>
 
-.picture {
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.card {
+  flex: 1 0 20%;
   position: relative;
-  box-shadow: 3px 4px 12px -2px;
-  width: 25vw;
-  height: 20vw;
+  width: 300px;
+  height: 40vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5%;
+  box-shadow: 4px 4px 13px -3px black;
 }
-
-#list img {
-  opacity: .6;
-  width: 65%;
-  margin: auto;
-  transition: visibility 0s 2s, 400ms;
-  position: relative;
-  top: 0%;
-  transform: translateY(30%);
+.card img {
+  width: 100%;
 }
-
-#list img:hover {
-  opacity: 1;
-  width: 80%;
-  transition: visibility 0s 2s, 400ms;
-  position: relative;
-  transform: translateY(0);
-}
-
-.like {
+.stats {
   position: absolute;
-  bottom: 4%;
-  right : 2%
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
+  bottom: 0;
+  right : 0;
+  width: 100%;
+  padding: 2%;
+  background: #333;
+  color: beige;
 }
 </style>

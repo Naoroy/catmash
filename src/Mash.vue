@@ -1,8 +1,10 @@
 <template>
   <div id="mash">
-    <div v-for="img in imgs" v-bind:key="img.id">
-      <img class="cat-pic" :src="img.url">
-      <button> like </button>
+    <div class="container">
+      <div class="card" v-for="img in imgs" v-bind:key="img.id">
+        <img :src="img.url">
+        <button class="like-btn"> like </button>
+      </div>
     </div>
   </div>
 </template>
@@ -20,37 +22,38 @@ export default  {
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-#column {
-  padding: 20px 0;
+<style lang="scss" scoped>
+.container {
   display: flex;
-  justify-content: space-between;
+  // width: 100%;
+  // margin: auto;
 }
-
-h1, h2 {
-  font-weight: normal;
+.card {
+  flex: 1 0 200px;
+  position: relative;
+  width: 100%;
+  height: 40vh;
+  // border: solid blue 1px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5%;
+  box-shadow: 4px 4px 13px -3px black;
 }
-
-ul {
-  list-style-type: none;
-  padding: 0;
+.card img {
+  width: 100%;
 }
-
-li {
-  display: inline-block;
-  margin: 0 10px;
+.like-btn {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #FD6690;
+  border: none
 }
+.like-btn:hover {
 
-a {
-  color: #42b983;
+  background: #FD8890;
 }
 </style>
