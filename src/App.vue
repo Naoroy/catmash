@@ -1,11 +1,11 @@
 <template>
   <div id="app">
+    <h2>cats...</h2>
     <nav>
       <button @click="refreshMash"> Mash </button>
       <button @click="mashPage=false"> List </button>
     </nav>
-
-    <Mash v-on:refresh="refreshMash" v-show="mashPage" :images="comparedImages"></Mash>
+    <Mash v-show="mashPage" :images="comparedImages"></Mash>
     <List v-show="!mashPage" :images="images"></List>
   </div>
 </template>
@@ -68,27 +68,16 @@ export default {
 </script>
 
 <style lang="scss">
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0
-}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin: 5% auto;
-  width: 65vw;
-  // background: grey;
+  margin: 10% auto;
+  width: 62%;
 }
 
-nav {
-  display: flex;
-  padding-bottom: 5vh;
-  // flex-direction: column;
-}
 h1, h2 {
   font-weight: normal;
 }
@@ -105,10 +94,5 @@ li {
 
 a {
   color: #42b983;
-}
-.container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
 }
 </style>

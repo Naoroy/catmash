@@ -1,14 +1,7 @@
 <template>
   <div id="list">
-    <div class="container">
-      <div class="card" v-for="img in images" :key="img.id">
-        <img :src="img.url">
-        <div class="stats">
-          <p > likes: 9000</p>
-
-        </div>
-        <!-- <a :href="img.url"> {{ img.url }}</a> -->
-      </div>
+    <div v-for="img in images" :key="img.id">
+      <img :src="img.url">
     </div>
   </div>
 </template>
@@ -21,71 +14,62 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.container {
-//   background: blue;
-//   width: 100%;
-//   display: flex;
-//   justify-content: space-between;
+<style lang="scss">
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
 
-}
-.stats {
-  position: absolute;
-  bottom: 3%;
-  background: lightblue;
-  width: 100%;
-  box-shadow: 2px 2px 11px black
-}
-.stats p {
-  text-align: right;
-  margin: 0 5%;
-}
-.card {
-  width: 30vw;
-  height: 20vw;
-  flex: 1 0 200px;
+.picture {
   position: relative;
-  overflow: hidden;
-  box-shadow: 3px 7px 13px -3px black;
-  margin: 2%;
-  border-radius: 2%;
+  box-shadow: 3px 4px 12px -2px;
+  width: 25vw;
+  height: 20vw;
 }
-.card img {
-  max-width: 92%;
-  max-height: 95%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translateX(-50%) translateY(-50%);
-  // transform: scale(2,2);
+
+#list img {
+  opacity: .6;
+  width: 65%;
+  margin: auto;
+  transition: visibility 0s 2s, 400ms;
+  position: relative;
+  top: 0%;
+  transform: translateY(30%);
 }
+
+#list img:hover {
+  opacity: 1;
+  width: 80%;
+  transition: visibility 0s 2s, 400ms;
+  position: relative;
+  transform: translateY(0);
+}
+
 .like {
   position: absolute;
   bottom: 4%;
   right : 2%
 }
-// .picture {
-//   position: relative;
-//   box-shadow: 3px 4px 12px -2px;
-//   width: 25vw;
-//   height: 20vw;
-// }
 
-// #list img {
-//   opacity: .6;
-//   width: 65%;
-//   margin: auto;
-//   transition: visibility 0s 2s, 400ms;
-//   position: relative;
-//   top: 0%;
-//   transform: translateY(30%);
-// }
+h1, h2 {
+  font-weight: normal;
+}
 
-// #list img:hover {
-//   opacity: 1;
-//   width: 80%;
-//   transition: visibility 0s 2s, 400ms;
-//   position: relative;
-//   transform: translateY(0);
-// }
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+a {
+  color: #42b983;
+}
 </style>
