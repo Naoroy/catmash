@@ -3,9 +3,9 @@
 const express = require('express')
 const updateDB = require('./methods/update-db')
 const getUrls = require('./methods/get-urls')
-// const routes = require('./router')
 
 const PORT = process.env.PORT || 4000
+
 
 express()
   .use((req, res, next) => {
@@ -14,10 +14,9 @@ express()
     next()
   })
   .use(express.json())
-  // .use(routes)
   .get('/', (req, res ) => {
     getUrls((data) => {
-      if (!data) return updateDB(getUrls)
+      if (!data.length) return updateDB(() => { getUrls() })
       res.send(data)
       res.end()
     })
