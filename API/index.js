@@ -8,13 +8,14 @@ const PORT = process.env.PORT || 4000
 
 
 express()
+  .use(express.static('./'))
   .use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
     next()
   })
   .use(express.json())
-  .get('/', (req, res ) => {
+  .get('/cats', (req, res ) => {
     getUrls((data) => {
       if (!data.length) return updateDB(() => { getUrls() })
       res.send(data)

@@ -29,7 +29,7 @@ export default {
   }),
   methods: {
     getUrls(callback) {
-      const url = 'http://localhost:'+PORT
+      const url = `http://localhost:${PORT}/cats`
       const xhr = new XMLHttpRequest()
       xhr.onload = (result) => {
         const data = JSON.parse(result.target.response)
