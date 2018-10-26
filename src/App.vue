@@ -14,8 +14,6 @@
 import List from './List.vue'
 import Mash from './Mash.vue'
 
-const PORT = process.env.PORT || 4000
-
 export default {
   name: 'app',
   components: {
@@ -29,8 +27,9 @@ export default {
   }),
   methods: {
     getUrls(callback) {
-      const url = `https://localhost:${PORT}/cats`
+      const url = 'https://calm-citadel-31631.herokuapp.com/'
       const xhr = new XMLHttpRequest()
+
       xhr.onload = (result) => {
         const data = JSON.parse(result.target.response)
         data.forEach((img) => { this.images.push(img) })
